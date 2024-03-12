@@ -1,0 +1,22 @@
+.resultBox {
+  background-color: var(--very-dark-cyan);
+}
+
+.person {
+  color: var(--grayish-cyan);
+  font-size: 0.875rem;
+}
+
+.sum {
+  color: var(--strong-cyan)
+}
+
+.resetB {
+  color: var(--dark-grayish-cyan);
+  background-color: teal;
+}
+
+.activeResetB {
+  background-color: var(--strong-cyan);
+  color: var(--very-dark-cyan)
+}

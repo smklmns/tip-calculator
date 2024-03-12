@@ -1,0 +1,36 @@
+@media(max-width: 640px) {
+  main {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-rows: 1fr auto;
+    row-gap: 1.5rem;
+    font-size: 0.9rem;
+    border-radius: 1.5rem 1.5rem 0 0;
+  }
+  h1 {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+  }
+  .percantageBox {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+  }
+  .percantageBox>p {
+    grid-column: 1 / 3
+  }
+  .percantageBox>button {
+    padding: 4px 0;
+  }
+  .customB {
+    max-width: 8rem;
+  }
+  .resultBox>div {
+    margin-bottom: 24px;
+  }
+  .sum {
+    font-size: 1.5rem;
+  }
+  .person {
+    font-size: 0.775rem;
+  }
+}
