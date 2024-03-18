@@ -4,17 +4,8 @@ import { AppContext } from '../App'
 
 const Result = () => {
   const {
-    price,
-    setPrice, 
-    people, 
-    setPeople, 
-    percantageState, 
-    setPercantageState, 
-    tip,
-    sum,
-    setTip,
-    setSum,
-    setCustomPercantage
+    action,
+    dispatch
   } = useContext(AppContext)
 
   return (
@@ -26,26 +17,26 @@ const Result = () => {
             <p className='text-white'>Tip Amount</p>
             <p className='person'>/ person</p>
           </div>
-          <p className="sum text-3xl font-bold">{price && people && percantageState ? "$"+tip : "$0.00"}</p>
+          <p className="sum text-3xl font-bold">{action.price && action.people && action.percentageState ? "$"+action.tip : "$0.00"}</p>
         </div>
         <div className='flex justify-between'>
           <div>
             <p className='text-white'>Total</p>
             <p className='person'>/ person</p>
           </div>
-          <p className='sum text-3xl font-bold'>{price && people && percantageState ? "$"+sum : "$0.00"}</p>
+          <p className='sum text-3xl font-bold'>{action.price && action.people && action.percentageState ? "$"+action.sum : "$0.00"}</p>
         </div>
       </div>
     <button 
       onClick={() => {
-        setPrice("")
-        setPeople("")
-        setPercantageState(0)
-        setCustomPercantage("")
-        setTip("$0.00")
-        setSum("$0.00")
+        dispatch({type: 'setPrice', payload: ''})
+        dispatch({type: 'setPeople', payload: ''})
+        dispatch({type: 'setPercentageState', payload: ''})
+        dispatch({type: 'setCustomPercentage', payload: ''})
+        dispatch({type: 'setTip', paylod: "$0.00"})
+        dispatch({type: 'setSum', paylod: "$0.00"})
       }}
-      className={price && people && percantageState ? "activeResetB" : "resetB"}>RESET</button>
+      className={action.price && action.people && action.percentageState ? "activeResetB" : "resetB"}>RESET</button>
     </div>
   )
 }

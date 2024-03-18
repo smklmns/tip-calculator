@@ -1,16 +1,31 @@
 import Form from "./components/Form";
 import Result from "./components/Result";
-import { useState, createContext, useEffect } from 'react'
+import {createContext, useEffect, useReducer } from 'react'
 
 export const AppContext = createContext()
 
+const reducer = (state, action) => {
+  switch(action.type) {
+    case 'setPrice':
+      return {...state, price: action.payload}
+    case 'setPeople':
+      return {...state, people: action.payload}
+    case 'setPercentageState':
+      return {...state, percentageState: action.payload} 
+    case 'setCustomPercentage':
+      return {...state, customPercentage: action.payload}
+    case 'setTip':
+      return {...state, tip: action.payload}
+    case 'setSum':
+      return {...state, sum: action.payload}
+    default:
+      throw new Error()
+  }
+}
+
 function App() {
-  let [price, setPrice] = useState("")
-  let [people, setPeople] = useState("")
-  let [percantageState, setPercantageState] = useState()
-  let [customPercantage, setCustomPercantage] = useState("")
-  let [tip, setTip] = useState()
-  let [sum, setSum] = useState()
+  const [action, dispatch] = useReducer(reducer, {price: '', people: '', percentageState: '', customPercentage: '', tip: '', sum: ''})
+
 
   useEffect(() => {
     tipPerPerson()
@@ -18,13 +33,13 @@ function App() {
   })
 
   const tipPerPerson = () => {
-    let calc = (Number(price * percantageState) / 100) / Number(people)
-    setTip(calc.toFixed(2))
+    let calc = (Number(action.price * action.percentageState) / 100) / Number(action.people)
+    dispatch({type: 'setTip', payload: calc.toFixed(2)})
   }
 
   const sumPerPerson = () => {
-    let calc = (Number(price * percantageState) / 100 + Number(price)) / Number(people)
-    setSum(calc.toFixed(2))
+    let calc = (Number(action.price * action.percentageState) / 100 + Number(action.price)) / Number(action.people)
+    dispatch({type: 'setSum', payload: calc.toFixed(2)})
   }
 
   return (
@@ -34,20 +49,8 @@ function App() {
       <main className="bg-white sm:rounded-3xl grid sm:grid-cols-2 sm:gap-x-6 p-6">
         <AppContext.Provider 
           value={{
-            price,
-            setPrice, 
-            people, 
-            setPeople, 
-            percantageState, 
-            setPercantageState, 
-            tipPerPerson, 
-            sumPerPerson,
-            tip,
-            setTip,
-            sum,
-            setSum,
-            customPercantage,
-            setCustomPercantage
+            action,
+            dispatch
           }}
         >
         <Form />
